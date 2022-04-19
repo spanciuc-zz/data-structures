@@ -51,8 +51,9 @@
     </dependencies>
 
     <modules>
-        <module>set</module>
         <module>list</module>
+        <module>set</module>
+        <module>queue</module>
     </modules>
 
     <build>
