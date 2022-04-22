@@ -30,6 +30,9 @@ jobs:
       - run:
           name: Analyze on SonarCloud
           command: mvn verify sonar:sonar -Dsonar.projectKey=spanciuc_data-structures
+      # Store build output!
+      - store_artifacts:
+          path: target
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
