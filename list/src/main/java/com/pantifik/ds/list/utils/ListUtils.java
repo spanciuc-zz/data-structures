@@ -42,7 +42,10 @@ public class ListUtils {
     }
   }
 
-  public static Object someNewMethod(){
-    return null;
+  public static Object someNewMethod(Object obj){
+    if(obj == null){
+      return null;
+    }
+    return obj;
   }
 }
