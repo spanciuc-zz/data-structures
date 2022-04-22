@@ -41,11 +41,4 @@ public class ListUtils {
       throw new IndexOutOfBoundsException(index);
     }
   }
-
-  public static Object someNewMethod(Object obj){
-    if(obj == null){
-      return null;
-    }
-    return obj;
-  }
 }
