@@ -26,8 +26,9 @@ jobs:
       - run:
           name: Test
           command: mvn install
+      - run: ls -la
       # Creates workspace folder.
-      - run: mkdir -p target
+      # - run: mkdir -p target
       # Persists data to target folder.
       - persist_to_workspace:
           root: target
