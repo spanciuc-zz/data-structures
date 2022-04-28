@@ -55,6 +55,7 @@
         <module>set</module>
         <module>queue</module>
         <module>stack</module>
+        <module>map</module>
     </modules>
 
     <build>
