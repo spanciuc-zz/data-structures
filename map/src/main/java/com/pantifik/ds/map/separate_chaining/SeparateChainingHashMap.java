@@ -1,4 +1,4 @@
-package com.pantifik.ds.map.impl;
+package com.pantifik.ds.map.separate_chaining;
 
 import static com.pantifik.ds.map.utils.MapUtils.calculateMinCapacity;
 import static com.pantifik.ds.map.utils.MapUtils.calculateThreshold;

@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import com.pantifik.ds.map.impl.SeparateChainingHashMap;
+import com.pantifik.ds.map.separate_chaining.SeparateChainingHashMap;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;

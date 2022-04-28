@@ -1,4 +1,4 @@
-package com.pantifik.ds.map.impl;
+package com.pantifik.ds.map.separate_chaining;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
