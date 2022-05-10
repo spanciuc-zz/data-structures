@@ -40,6 +40,12 @@ public abstract class AbstractMap<K, V> implements Map<K, V> {
   }
 
   @Override
+  public void putAll(Map<? extends K, ? extends V> m) {
+    Objects.requireNonNull(m);
+    m.forEach(this::put);
+  }
+
+  @Override
   public int hashCode() {
     int result = 0;
     for (var entry : entrySet()) {

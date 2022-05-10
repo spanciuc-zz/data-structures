@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import java.util.stream.Stream;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -54,13 +55,25 @@ class MapUtilsTest {
         MapUtils.calculateMinCapacity(threshold, loadFactor));
   }
 
+  @ParameterizedTest
+  @CsvSource({"1, 1", "-10, -11", "9, 8",})
+  void requireGreaterThan_whenValueIsLessThanAllowed_shouldThrowException(
+      int allowed, int value) {
+    assertThrows(IllegalArgumentException.class,
+        () -> MapUtils.requireGreaterThan(allowed, value));
+  }
+
+  @ParameterizedTest
+  @CsvSource({"1, 10", "-10, -9", "9, 10",})
+  void requireGreaterThan_whenValueIsGreaterThanAllowed_shouldNotThrowException(
+      int allowed, int value) {
+    assertDoesNotThrow(() -> MapUtils.requireGreaterThan(allowed, value));
+  }
+
   private static Stream<Arguments> calculateMinCapacityProvider() {
-    return Stream.of(Arguments.of(10, 1, 0.1f),
-        Arguments.of(1, 1, 1f),
-        Arguments.of(2, 1, 0.5f),
-        Arguments.of(3, 1, 0.4f),
-        Arguments.of(5, 1, 0.23f),
-        Arguments.of(2, 1, 0.75f),
+    return Stream.of(Arguments.of(10, 1, 0.1f), Arguments.of(1, 1, 1f),
+        Arguments.of(2, 1, 0.5f), Arguments.of(3, 1, 0.4f),
+        Arguments.of(5, 1, 0.23f), Arguments.of(2, 1, 0.75f),
         Arguments.of(2, 1, 0.99f));
   }
 

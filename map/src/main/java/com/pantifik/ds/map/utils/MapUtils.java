@@ -25,5 +25,13 @@ public class MapUtils {
     return (int) Math.ceil((threshold / loadFactor));
   }
 
+  public static void requireGreaterThan(int lowerBound, int value) {
+    if (value <= lowerBound) {
+      throw new IllegalArgumentException(
+          String.format("Value greater than %s is required, but was %s",
+              lowerBound, value));
+    }
+  }
+
 
 }
