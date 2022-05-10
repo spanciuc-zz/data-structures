@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-class HashMapTest extends AbstractMapTest {
+class SeparateChainingHashMapTest extends AbstractMapTest {
 
   @Override
   protected Map<Object, Object> createMapInstance() {

@@ -8,7 +8,6 @@ import com.pantifik.ds.map.AbstractMap;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.LinkedList;
-import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.function.IntFunction;
@@ -17,22 +16,20 @@ import java.util.stream.Stream;
 
 public class SeparateChainingHashMap<K, V> extends AbstractMap<K, V> {
 
-
   private static final int RESIZE_FACTOR = 2;
   private static final int DEFAULT_CAPACITY = 13;
   private static final float DEFAULT_LOAD_FACTOR = .75f;
   private final float loadFactor;
   private LinkedList<Entry<K, V>>[] table;
-  private int capacity;
-  private int threshold;
-  private int size;
-
   private final IntFunction<Supplier<LinkedList<Entry<K, V>>>> createNewListAtIndex
       = index -> () -> {
     var newList = new LinkedList<Entry<K, V>>();
     table[index] = newList;
     return newList;
   };
+  private int capacity;
+  private int threshold;
+  private int size;
 
   public SeparateChainingHashMap() {
     this(DEFAULT_CAPACITY, DEFAULT_LOAD_FACTOR);
@@ -106,12 +103,6 @@ public class SeparateChainingHashMap<K, V> extends AbstractMap<K, V> {
   public V remove(Object key) {
     Objects.requireNonNull(key);
     return removeEntryByKey(key);
-  }
-
-  @Override
-  public void putAll(Map<? extends K, ? extends V> m) {
-    Objects.requireNonNull(m);
-    m.forEach(this::put);
   }
 
   @Override
@@ -190,8 +181,7 @@ public class SeparateChainingHashMap<K, V> extends AbstractMap<K, V> {
     }
     size = newSize;
     int index = calculateIndex(entry.getKey());
-    var list = getListAtIndex(index).orElseGet(
-        createNewListAtIndex.apply(index));
+    var list = getListAtIndex(index).orElseGet(createNewListAtIndex.apply(index));
     list.add(entry);
   }
 
