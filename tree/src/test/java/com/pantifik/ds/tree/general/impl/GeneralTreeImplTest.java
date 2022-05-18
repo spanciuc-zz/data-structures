@@ -9,7 +9,6 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 import com.pantifik.ds.tree.general.GeneralTree;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -18,6 +17,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+@SuppressWarnings("unchecked")
 @ExtendWith(MockitoExtension.class)
 class GeneralTreeImplTest {
 
@@ -48,6 +48,7 @@ class GeneralTreeImplTest {
   void parent_whenHasParent_shouldReturnOptionalOfParentTree() {
     GeneralTree<Object> parent = new GeneralTreeImpl<>("parent");
     tree = new GeneralTreeImpl<>(parent, TEST_ROOT);
+    //noinspection OptionalGetWithoutIsPresent
     assertEquals(parent, tree.parent()
         .get());
   }
@@ -150,6 +151,7 @@ class GeneralTreeImplTest {
     GeneralTree<Object> subtree = new GeneralTreeImpl<>(null, TEST_ROOT);
     tree = new GeneralTreeImpl<>(TEST_ROOT);
     tree.addSubtree(subtree);
+    //noinspection OptionalGetWithoutIsPresent
     assertEquals(tree, subtree.parent()
         .get());
   }
