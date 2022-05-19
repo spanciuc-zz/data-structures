@@ -1,9 +1,8 @@
-package com.pantifik.ds.queue.test.simple;
+package com.pantifik.ds.queue.simple;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import com.pantifik.ds.queue.simple.SimpleQueue;
-import com.pantifik.ds.queue.test.QueueTest;
+import com.pantifik.ds.queue.QueueTest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
