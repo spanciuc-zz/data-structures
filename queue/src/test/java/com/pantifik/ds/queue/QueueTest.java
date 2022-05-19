@@ -1,4 +1,4 @@
-package com.pantifik.ds.queue.test;
+package com.pantifik.ds.queue;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
