@@ -129,6 +129,15 @@ public class BinaryHeap<T extends Comparable<T>> implements Heap<T> {
   }
 
   @Override
+  public Optional<T> peek() {
+    if (size() == 0) {
+      return Optional.empty();
+    } else {
+      return Optional.of(array[0]);
+    }
+  }
+
+  @Override
   public Type getType() {
     return type;
   }

@@ -2,6 +2,7 @@ package com.pantifik.ds.tree.heap.binary;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import com.pantifik.ds.tree.heap.Type;
@@ -133,10 +134,28 @@ class BinaryHeapTest<T extends Comparable<T>> {
 
   @ParameterizedTest
   @MethodSource("getElementForHeapTypeProvider")
-  void getElement_shouldReturnValueForHeapType(Type type, T expected) {
+  void getElement_shouldReturnValueForHeapTypeAndRemoveIt(Type type, T expected) {
     heap = new BinaryHeap<>(BinaryHeap.DEFAULT_CAPACITY, type);
     heap.addAll((Iterable<T>) List.of(1, 2, 3, 4, 5, 6, 7, 8, 9));
     assertEquals(Optional.of(expected), heap.getElement());
+    assertEquals(8, heap.size());
+    assertNotEquals(Optional.of(expected), heap.getElement());
+  }
+
+  @Test
+  void peek_whenEmpty_shouldReturnEmptyOptional() {
+    heap = new BinaryHeap<>();
+    assertEquals(Optional.empty(), heap.peek());
+  }
+
+  @ParameterizedTest
+  @MethodSource("getElementForHeapTypeProvider")
+  void peek_shouldReturnValueForHeapTypeAndNotRemove(Type type, T expected) {
+    heap = new BinaryHeap<>(BinaryHeap.DEFAULT_CAPACITY, type);
+    heap.addAll((Iterable<T>) List.of(1, 2, 3, 4, 5, 6, 7, 8, 9));
+    assertEquals(Optional.of(expected), heap.peek());
+    assertEquals(9, heap.size());
+    assertEquals(Optional.of(expected), heap.peek());
   }
 
   @Test

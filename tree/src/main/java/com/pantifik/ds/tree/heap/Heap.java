@@ -19,7 +19,8 @@ public interface Heap<T extends Comparable<T>> {
   int size();
 
   /**
-   * Gets the min or max element of this heap, depending on type of the heap. see {@link Type}.
+   * Gets and removes the min or max element of this heap, depending on type of the heap. see {@link
+   * Type}.
    * <p>
    * In case the heap is empty, an empty Optional is returned.
    *
@@ -27,6 +28,18 @@ public interface Heap<T extends Comparable<T>> {
    *     empty.
    */
   Optional<T> getElement();
+
+  /**
+   * Gets but does not remove min or max element of this heap, depending on type of the heap. see
+   * {@link Type}.
+   *
+   * <p>
+   * In case the heap is empty, an empty Optional is returned.
+   *
+   * @return an Optional of the max or min element if present, or empty Optional if the heap is
+   *     empty.
+   */
+  Optional<T> peek();
 
   /**
    * Gets the type of the heap. see {@link Type}.
