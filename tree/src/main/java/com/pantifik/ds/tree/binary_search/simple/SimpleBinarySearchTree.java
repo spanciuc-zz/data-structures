@@ -44,16 +44,13 @@ public class SimpleBinarySearchTree<T extends Comparable<T>> implements BinarySe
   @Override
   public boolean add(T elem) {
     Objects.requireNonNull(elem);
-    if (isEmpty()) {
-      root = new SimpleBinaryNode<>(elem);
+
+    if (contains(elem)) {
+      return false;
+    } else {
+      root = insert(root, elem);
       size++;
       return true;
-    } else {
-      boolean modified = insert(root, elem);
-      if (modified) {
-        size++;
-      }
-      return modified;
     }
   }
 
@@ -99,6 +96,10 @@ public class SimpleBinarySearchTree<T extends Comparable<T>> implements BinarySe
    */
   public BinaryNode<T> getRoot() {
     return root;
+  }
+
+  private BinaryNode<T> createNode(T elem) {
+    return new SimpleBinaryNode<>(elem);
   }
 
   private BinaryNode<T> removeNode(BinaryNode<T> node, T elem) {
@@ -152,32 +153,18 @@ public class SimpleBinarySearchTree<T extends Comparable<T>> implements BinarySe
     }
   }
 
-  private boolean insert(BinaryNode<T> current, T elem) {
-    int compared = Objects.compare(elem, current.getData(), Comparator.naturalOrder());
-    if (compared == 0) {
-      return false;
-    } else if (compared < 0) {
-      return insertLeft(current, elem);
-    } else {
-      return insertRight(current, elem);
-    }
-  }
+  private BinaryNode<T> insert(BinaryNode<T> current, T elem) {
 
-  private boolean insertRight(BinaryNode<T> current, T elem) {
-    if (current.getRight() == null) {
-      current.setRight(new SimpleBinaryNode<>(elem));
-      return true;
+    if (current == null) {
+      current = createNode(elem);
     } else {
-      return insert(current.getRight(), elem);
+      int compared = Objects.compare(elem, current.getData(), Comparator.naturalOrder());
+      if (compared < 0) {
+        current.setLeft(insert(current.getLeft(), elem));
+      } else {
+        current.setRight(insert(current.getRight(), elem));
+      }
     }
-  }
-
-  private boolean insertLeft(BinaryNode<T> current, T elem) {
-    if (current.getLeft() == null) {
-      current.setLeft(new SimpleBinaryNode<>(elem));
-      return true;
-    } else {
-      return insert(current.getLeft(), elem);
-    }
+    return current;
   }
 }
