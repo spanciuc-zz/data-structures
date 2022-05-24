@@ -81,7 +81,7 @@ public class SimpleBinarySearchTree<T extends Comparable<T>> implements BinarySe
 
   @Override
   public void clear() {
-    clear(root);
+    clearNode(root);
     root = null;
     size = INITIAL_SIZE;
   }
@@ -128,10 +128,10 @@ public class SimpleBinarySearchTree<T extends Comparable<T>> implements BinarySe
     return node;
   }
 
-  private void clear(SimpleBinaryNode<T> node) {
+  private void clearNode(SimpleBinaryNode<T> node) {
     if (node != null) {
-      clear(node.left);
-      clear(node.right);
+      clearNode(node.left);
+      clearNode(node.right);
       node.left = null;
       node.right = null;
     }
