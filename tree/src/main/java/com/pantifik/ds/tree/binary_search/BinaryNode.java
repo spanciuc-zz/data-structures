@@ -15,6 +15,14 @@ public interface BinaryNode<T extends Comparable<T>> {
   T getData();
 
   /**
+   * Sets the data.
+   *
+   * @param data
+   *     the data.
+   */
+  void setData(T data);
+
+  /**
    * Gets the left child node.
    *
    * @return the left child node.
@@ -22,9 +30,25 @@ public interface BinaryNode<T extends Comparable<T>> {
   BinaryNode<T> getLeft();
 
   /**
+   * Sets the left node.
+   *
+   * @param left
+   *     the node.
+   */
+  void setLeft(BinaryNode<T> left);
+
+  /**
    * Gets the right child node.
    *
    * @return the right child node.
    */
   BinaryNode<T> getRight();
+
+  /**
+   * Sets the right child node.
+   *
+   * @param right
+   *     the node.
+   */
+  void setRight(BinaryNode<T> right);
 }
