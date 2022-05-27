@@ -1,12 +1,9 @@
 package com.pantifik.ds.tree.binary_search.simple;
 
+import com.pantifik.ds.tree.binary_search.AbstractBinarySearchTree;
 import com.pantifik.ds.tree.binary_search.BinaryNode;
-import com.pantifik.ds.tree.binary_search.BinarySearchTree;
-import com.pantifik.ds.tree.binary_search.TreeTraversal;
 import java.util.Comparator;
-import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 
 /**
  * A BST implementation.
@@ -14,19 +11,20 @@ import java.util.Optional;
  * @param <T>
  *     the type of the element in the tree.
  */
-public class SimpleBinarySearchTree<T extends Comparable<T>> implements BinarySearchTree<T> {
+public class SimpleBinarySearchTree<T extends Comparable<T>> extends AbstractBinarySearchTree<T> {
 
   /**
    * Initial tree size.
    */
   static final int INITIAL_SIZE = 0;
-  private int size;
-  private BinaryNode<T> root;
+  protected int size;
+  protected SimpleBinaryNode<T> root;
 
   /**
    * Creates an instance of this class.
    */
   public SimpleBinarySearchTree() {
+    super();
     size = INITIAL_SIZE;
     root = null;
   }
@@ -37,14 +35,8 @@ public class SimpleBinarySearchTree<T extends Comparable<T>> implements BinarySe
   }
 
   @Override
-  public boolean isEmpty() {
-    return size() == 0;
-  }
-
-  @Override
   public boolean add(T elem) {
     Objects.requireNonNull(elem);
-
     if (contains(elem)) {
       return false;
     } else {
@@ -69,14 +61,6 @@ public class SimpleBinarySearchTree<T extends Comparable<T>> implements BinarySe
   }
 
   @Override
-  public boolean contains(T elem) {
-    if (elem == null) {
-      return false;
-    }
-    return search(root, elem).isPresent();
-  }
-
-  @Override
   public void clear() {
     clearNode(root);
     root = null;
@@ -84,25 +68,15 @@ public class SimpleBinarySearchTree<T extends Comparable<T>> implements BinarySe
   }
 
   @Override
-  public List<T> traverse(TreeTraversal treeTraversal) {
-    Objects.requireNonNull(treeTraversal);
-    return treeTraversal.traverse(root);
-  }
-
-  /**
-   * Gets the root node of the tree.
-   *
-   * @return the root node
-   */
   public BinaryNode<T> getRoot() {
     return root;
   }
 
-  private BinaryNode<T> createNode(T elem) {
+  private SimpleBinaryNode<T> createNode(T elem) {
     return new SimpleBinaryNode<>(elem);
   }
 
-  private BinaryNode<T> removeNode(BinaryNode<T> node, T elem) {
+  private SimpleBinaryNode<T> removeNode(SimpleBinaryNode<T> node, T elem) {
     int compared = Objects.compare(elem, node.getData(), Comparator.naturalOrder());
     if (compared < 0) {
       node.setLeft(removeNode(node.getLeft(), elem));
@@ -122,14 +96,14 @@ public class SimpleBinarySearchTree<T extends Comparable<T>> implements BinarySe
     return node;
   }
 
-  private BinaryNode<T> findMaxInLeftSubtree(BinaryNode<T> node) {
+  private SimpleBinaryNode<T> findMaxInLeftSubtree(SimpleBinaryNode<T> node) {
     while (node.getRight() != null) {
       node = node.getRight();
     }
     return node;
   }
 
-  private void clearNode(BinaryNode<T> node) {
+  private void clearNode(SimpleBinaryNode<T> node) {
     if (node != null) {
       clearNode(node.getLeft());
       clearNode(node.getRight());
@@ -138,22 +112,8 @@ public class SimpleBinarySearchTree<T extends Comparable<T>> implements BinarySe
     }
   }
 
-  private Optional<BinaryNode<T>> search(BinaryNode<T> current, T elem) {
-    if (current == null) {
-      return Optional.empty();
-    } else {
-      int compared = Objects.compare(elem, current.getData(), Comparator.naturalOrder());
-      if (compared == 0) {
-        return Optional.of(current);
-      } else if (compared < 0) {
-        return search(current.getLeft(), elem);
-      } else {
-        return search(current.getRight(), elem);
-      }
-    }
-  }
 
-  private BinaryNode<T> insert(BinaryNode<T> current, T elem) {
+  private SimpleBinaryNode<T> insert(SimpleBinaryNode<T> current, T elem) {
 
     if (current == null) {
       current = createNode(elem);

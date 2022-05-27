@@ -4,9 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
-import com.pantifik.ds.tree.binary_search.TreeTraversal;
 import java.util.List;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.BeforeEach;
@@ -15,7 +12,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
-import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 @ExtendWith(MockitoExtension.class)
@@ -31,17 +27,6 @@ class SimpleBinarySearchTreeTest<T extends Comparable<T>> {
   @Test
   void constructor_shouldCreateEmptyTree() {
     assertTrue(tree.isEmpty());
-  }
-
-  @Test
-  void isEmpty_whenIsEmpty_shouldReturnTrue() {
-    assertTrue(tree.isEmpty());
-  }
-
-  @Test
-  void isEmpty_whenIsNotEmpty_shouldReturnFalse() {
-    tree.add((T) "elem");
-    assertFalse(tree.isEmpty());
   }
 
   @Test
@@ -126,36 +111,6 @@ class SimpleBinarySearchTreeTest<T extends Comparable<T>> {
   }
 
   @Test
-  void contains_whenNull_shouldReturnFalse() {
-    T element = (T) (Integer) 1;
-    tree.add((T) (Integer) 0);
-    tree.add((T) (Integer) 3);
-    tree.add((T) (Integer) 101);
-    tree.add((T) (Integer) 101);
-    assertFalse(tree.contains(null));
-  }
-
-  @Test
-  void contains_whenPresent_shouldReturnTrue() {
-    T element = (T) (Integer) 1;
-    tree.add((T) (Integer) 0);
-    tree.add((T) (Integer) 3);
-    tree.add((T) (Integer) element);
-    tree.add((T) (Integer) 101);
-    assertTrue(tree.contains(element));
-  }
-
-  @Test
-  void contains_whenNotPresent_shouldReturnFalse() {
-    T element = (T) (Integer) 1;
-    tree.add((T) (Integer) 0);
-    tree.add((T) (Integer) 3);
-    tree.add((T) (Integer) 101);
-    tree.add((T) (Integer) 101);
-    assertFalse(tree.contains(element));
-  }
-
-  @Test
   void clear_shouldRemoveAllTheElements() {
     tree.add((T) "1");
     tree.add((T) "2");
@@ -164,18 +119,6 @@ class SimpleBinarySearchTreeTest<T extends Comparable<T>> {
     tree.add((T) "5");
     tree.clear();
     assertTrue(tree.isEmpty());
-  }
-
-  @Test
-  void traverse_whenNull_shouldThrowException() {
-    assertThrows(NullPointerException.class, () -> tree.traverse(null));
-  }
-
-  @Test
-  void traverse_whenNotNull_shouldReturnTraversalTypeResult(@Mock TreeTraversal treeTraversal) {
-    List<T> expected = (List<T>) List.of(1, 2, 3);
-    when(treeTraversal.traverse(any())).thenAnswer(invocationOnMock -> expected);
-    assertEquals(expected, tree.traverse(treeTraversal));
   }
 
   private static Stream<Arguments> removeWhenPresentProvider() {
